@@ -1,9 +1,20 @@
 const { Resend } = require('resend');
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY 
+  ? new Resend(process.env.RESEND_API_KEY) 
+  : null;
+
+if (!resend) {
+  console.warn('RESEND_API_KEY is missing. Email service will be disabled.');
+}
 
 const sendEmail = async (to, subject, html) => {
   try {
+    if (!resend) {
+      console.log(`Mock Email sent to ${to}: ${subject}`);
+      return { success: true, data: { status: 'mocked' } };
+    }
+
     const { data, error } = await resend.emails.send({
       from: process.env.FROM_EMAIL || 'Golf Charity <noreply@golfcharity.com>',
       to,
