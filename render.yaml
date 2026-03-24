@@ -23,7 +23,7 @@ services:
       - key: STRIPE_YEARLY_PRICE_ID
         sync: false
       - key: FRONTEND_URL
-        value: https://golf-charity.onrender.com # Change this once frontend is up
+        value: https://golf-charity.onrender.com
 
   # Frontend Static Site
   - type: web
@@ -31,7 +31,7 @@ services:
     env: static
     plan: free
     buildCommand: npm install && npm run build
-    publishDir: dist
+    staticPublishPath: dist
     routes:
       - type: rewrite
         source: /*
