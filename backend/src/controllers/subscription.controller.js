@@ -8,7 +8,12 @@ exports.createCheckout = async (req, res) => {
   const { plan } = req.body;
   const user = req.user;
 
-  const planId = plan === 'monthly' ? process.env.STRIPE_MONTHLY_PRICE_ID : process.env.STRIPE_YEARLY_PRICE_ID;
+  let planId = plan === 'monthly' ? process.env.STRIPE_MONTHLY_PRICE_ID : process.env.STRIPE_YEARLY_PRICE_ID;
+
+  // Use a dummy plan ID if missing (for demo/mock purposes)
+  if (!planId && (!process.env.STRIPE_SECRET_KEY || process.env.NODE_ENV !== 'production')) {
+    planId = 'price_mock_' + plan;
+  }
 
   if (!planId) {
     return sendResponse(res, 400, 'Invalid subscription plan or missing Stripe price ID');
