@@ -21,7 +21,7 @@ app.use(helmet({
 
 // CORS setup - ensure no whitespace from env split
 const allowedOrigins = process.env.FRONTEND_URL 
-  ? process.env.FRONTEND_URL.split(',').map(o => o.trim()) 
+  ? process.env.FRONTEND_URL.split(',').map(o => o.trim().replace(/\/$/, '')) 
   : ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000'];
 
 app.use(cors({
