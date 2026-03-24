@@ -1,73 +1,82 @@
-# React + TypeScript + Vite
+# ⛳ GolfCharity: Play. Win. Give.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**GolfCharity** is a premium golf-themed participation platform where players log their Stableford rounds for a chance to win monthly jackpots, with at least 10% of every subscription going directly to their chosen charities.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌟 Key Features
 
-## React Compiler
+### 👤 Member Dashboard
+- **Score Logging**: Easily track your Stableford points and qualify for the monthly draw. Only your 5 most recent rounds are kept active for maximum fairness.
+- **Charity Selection**: Choose your impact! Select from a directory of vetted charities and set your personalized donation percentage.
+- **Winnings Tracker**: Real-time status of prize earnings, pending payouts, and proof verification.
+- **Subscription Management**: Securely manage your membership level (Monthly or Pro) and impact levels.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🛡️ Admin Command Center
+- **System Pulse**: Live activity logs for platform events (registrations, scores, subscriptions).
+- **KPI Analytics**: Real-time business metrics including Active Subscribers, Prize Pool Growth, and Total Charity Impact.
+- **User Management**: Unified dashboard to manage user status (Active/Suspended/Verified).
+- **Winner Claims**: Streamlined process to verify winner handicaps and process payouts.
+- **Charity Portal**: Register and manage supported non-profit organizations.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Technology Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Frontend**: React 18, TypeScript, Vite, Tailwind CSS, Framer Motion, Recharts.
+- **Backend**: Node.js, Express.js.
+- **Database**: MongoDB (Mongoose ODM).
+- **Authentication**: JWT (JSON Web Tokens) with secure HTTP headers.
+- **Payments**: Stripe (Integrated for subscription lifecycle and webhooks).
+- **Media**: Cloudinary (Secure storage for handicap proof and charity logos).
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🚀 Getting Started
+
+### 1. Prerequisites
+- Node.js (v18+)
+- MongoDB (Local or Atlas)
+
+### 2. Environment Setup
+Create a `.env` file in the `backend/` directory:
+```env
+PORT=5001
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+STRIPE_SECRET_KEY=your_stripe_key
+STRIPE_MONTHLY_PRICE_ID=price_...
+STRIPE_YEARLY_PRICE_ID=price_...
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+FRONTEND_URL=http://localhost:5173
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 3. Installation
+**Backend:**
+```bash
+cd backend
+npm install
+npm run dev
 ```
+
+**Frontend:**
+```bash
+# From root
+npm install
+npm run dev
+```
+
+---
+
+## 🏗️ Architecture Design
+
+- **The Giving Guarantee**: All subscription payments are automatically distributed based on the user's selected `charity_percentage`.
+- **The Draw Algorithm**: Monthly winners are calculated using a rolling window of recent scores, ensuring consistent participation is rewarded.
+- **Verification Loop**: Premium payouts require an official handicap screenshot, which is uploaded by the member and verified by an admin.
+
+---
+
+## 📜 License
+This project is private and proprietary.
